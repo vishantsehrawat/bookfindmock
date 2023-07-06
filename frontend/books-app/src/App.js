@@ -15,7 +15,7 @@ function App() {
 
   useEffect(() => {
     getBooks()
-  }, [])
+  }, [filterByGenre])
 
   const deployedUrl = "https://bookmock.onrender.com"
 
@@ -23,10 +23,6 @@ function App() {
   const getBooks = async () => {
     try {
       const response = await axios.get(`${deployedUrl}/getbook`)
-      console.log("🚀 ~ file: App.js:24 ~ getBooks ~ response:", response)
-      console.log("🚀 ~ file: App.js:26 ~ getBooks ~ response:", response)
-      console.log("🚀 ~ file: App.js:26 ~ getBooks ~ response:", response)
-      console.log("🚀 ~ file: App.js:26 ~ getBooks ~ response:", response)
       setBook(response.data.data)
       console.log("🚀 ~ file: App.js:29 ~ getBooks ~ response:", response)
     } catch (error) {
@@ -67,10 +63,10 @@ function App() {
   const filterBook = async () => {
     try {
       const response = await axios.get(`${deployedUrl}/getbook/filter`, {
-        params: { query: filterByGenre },
+        params: { query: filterByGenre},
       });
       console.log("🚀 ~ file: App.js:70 ~ filterBook ~ response:", response)
-      setBook(response.data);
+      setBook(response.data.data);
     } catch (error) {
       console.error(error);
     }
@@ -88,6 +84,17 @@ function App() {
   //   }
   // };
 
+  // <div>
+  //       <label>Sort By:</label>
+  //       <select
+  //         value={sortBy}
+  //         onChange={(e) => setSortBy(e.target.value)}
+  //       >
+  //         <option value="">None</option>
+  //         <option value="asc">Ascending</option>
+  //         <option value="desc">Descending</option>
+  //       </select>
+  //     </div>
 
   return (
     <div>
