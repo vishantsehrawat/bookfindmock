@@ -1,12 +1,12 @@
 const express = require("express");
 const { connection } = require("./configs/dbConnection");
 const { BookModel } = require("./model/book.model");
-
+const cors = require("cors");
 require("dotenv").config();
 const app = express();
 
 app.use(express.json())
-
+app.use(cors());
 
 
 app.get("/", (req, res) => {

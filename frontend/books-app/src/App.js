@@ -85,7 +85,7 @@ function App() {
         <label>price</label>
         <input type="text" value={price} onChange={(e) => setPrice(e.target.value)} />
         <br />
-        <input type="submit"> Add new book</input>
+        <input type="submit" value="Add new book" />
       </form>
 
       <h1>List of all the books </h1>
