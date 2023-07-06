@@ -11,6 +11,7 @@ function App() {
   const [genre, setGenre] = useState("");
   const [description, setDescription] = useState("")
   const [price, setPrice] = useState("")
+  const [filterByGenre, filterbygenre] = useState('');
 
   useEffect(() => {
     getBooks()
@@ -23,7 +24,11 @@ function App() {
     try {
       const response = await axios.get(`${deployedUrl}/getbook`)
       console.log("🚀 ~ file: App.js:24 ~ getBooks ~ response:", response)
+      console.log("🚀 ~ file: App.js:26 ~ getBooks ~ response:", response)
+      console.log("🚀 ~ file: App.js:26 ~ getBooks ~ response:", response)
+      console.log("🚀 ~ file: App.js:26 ~ getBooks ~ response:", response)
       setBook(response.data.data)
+      console.log("🚀 ~ file: App.js:29 ~ getBooks ~ response:", response)
     } catch (error) {
       console.log(error)
     }
@@ -59,10 +64,42 @@ function App() {
     }
   }
 
+  const filterBook = async () => {
+    try {
+      const response = await axios.get(`${deployedUrl}/getbook/filter`, {
+        params: { query: filterByGenre },
+      });
+      console.log("🚀 ~ file: App.js:70 ~ filterBook ~ response:", response)
+      setBook(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // const sortBook = async () => {
+  //   try {
+  //     const response = await axios.get(`${deployedUrl}/getbook/filter`, {
+  //       query: { sortBy },
+  //     });
+  //     console.log("🚀 ~ file: App.js:82 ~ sortBook ~ response:", response)
+  //     setBook(response.data);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
 
   return (
     <div>
+      <div>
+        <label>Filter by Genre:</label>
+        <input
+          type="text"
+          value={filterByGenre}
+          onChange={(e) => filterbygenre(e.target.value)}
+        />
+        <button onClick={filterBook}>Filter</button>
+      </div>
       <h1>
         Add a book to the list
       </h1>
